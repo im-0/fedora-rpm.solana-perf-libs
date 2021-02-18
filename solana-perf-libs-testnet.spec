@@ -2,7 +2,7 @@
 
 Name:       solana-perf-libs-%{solana_suffix}
 Version:    0.19.3
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    C and CUDA libraries to enhance Solana (no CUDA, only SIMD)
 
 License:    Apache-2.0
@@ -35,9 +35,16 @@ cp -p \
 
 
 %files
+%dir /opt/solana
+%dir /opt/solana/%{solana_suffix}
+%dir /opt/solana/%{solana_suffix}/bin
+%dir /opt/solana/%{solana_suffix}/bin/perf-libs
 /opt/solana/%{solana_suffix}/bin/perf-libs/libpoh-simd.so
 
 
 %changelog
+* Thu Feb 18 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-2
+- Add directories
+
 * Sat Feb 13 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-1
 - Initial packaging
