@@ -1,8 +1,8 @@
-%global solana_suffix testnet
+%global solana_suffix mainnet
 
 Name:       solana-perf-libs-%{solana_suffix}
 Version:    0.19.3
-Release:    2%{?dist}
+Release:    1%{?dist}
 Summary:    C and CUDA libraries to enhance Solana (no CUDA, only SIMD)
 
 License:    Apache-2.0
@@ -43,8 +43,5 @@ cp -p \
 
 
 %changelog
-* Thu Feb 18 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-2
-- Add directories
-
-* Sat Feb 13 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-1
-- Initial packaging
+* Sat Mar 20 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-1
+- Initial packaging for Mainnet
