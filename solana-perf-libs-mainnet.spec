@@ -1,13 +1,18 @@
 %global solana_suffix mainnet
 
+# Check `--device` in `ispc --help` for available options.
+%global validator_target_cpu core-avx2
+
 Name:       solana-perf-libs-%{solana_suffix}
 Version:    0.19.3
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    C and CUDA libraries to enhance Solana (no CUDA, only SIMD)
 
 License:    Apache-2.0
 URL:        https://github.com/solana-labs/solana-perf-libs/
 Source0:    https://github.com/solana-labs/solana-perf-libs/archive/v%{version}/solana-perf-libs-%{version}.tar.gz
+
+Patch0: override-device-for-avx512skx.patch
 
 BuildRequires:  gcc
 BuildRequires:  make
@@ -19,12 +24,13 @@ C and CUDA libraries to enhance Solana (no CUDA, only SIMD).
 
 
 %prep
-%autosetup -b0 -n solana-perf-libs-%{version}
+%autosetup -N -b0 -n solana-perf-libs-%{version}
+%patch0 -p1
 
 
 %build
 cd src/poh-simd
-%make_build ISPC_FLAGS="-g -O2 --pic -I."
+%make_build ISPC_FLAGS="-g -O3 --device=%{validator_target_cpu} --opt=fast-masked-vload --opt=force-aligned-memory --pic -I."
 
 
 %install
@@ -43,5 +49,8 @@ cp -p \
 
 
 %changelog
+* Sun Sep 11 2022 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-2
+- More flags for ispc
+
 * Sat Mar 20 2021 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-1
 - Initial packaging for Mainnet
