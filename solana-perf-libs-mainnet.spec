@@ -5,7 +5,7 @@
 
 Name:       solana-perf-libs-%{solana_suffix}
 Version:    0.19.3
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    C and CUDA libraries to enhance Solana (no CUDA, only SIMD)
 
 License:    Apache-2.0
@@ -25,7 +25,7 @@ C and CUDA libraries to enhance Solana (no CUDA, only SIMD).
 
 %prep
 %autosetup -N -b0 -n solana-perf-libs-%{version}
-%patch0 -p1
+%patch -P 0 -p1
 
 
 %build
@@ -49,6 +49,9 @@ cp -p \
 
 
 %changelog
+* Sun Sep 22 2024 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-3
+- Fix build for Fedora 41
+
 * Sun Sep 11 2022 Ivan Mironov <mironov.ivan@gmail.com> - 0.19.3-2
 - More flags for ispc
 
